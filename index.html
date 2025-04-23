@@ -3,69 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Civitas Protetta</title>
+    <title>Civitas Protetta - Basilicata</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ... Stili precedenti ... */
+        #location-detection {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 0.5em;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <span>CP</span> Civitas Protetta
+            <span>CP</span> Civitas Protetta - Basilicata
         </div>
         <div class="location-selector">
             <label for="location">Località:</label>
             <select id="location">
                 <option value="potenza" selected>Potenza</option>
-                <option value="altro">Altro...</option>
+                <option value="matera">Matera</option>
+                <option value="lagonegro">Lagonegro</option>
+                <option value="altre">Altre località...</option>
             </select>
+            <span id="current-location">Potenza</span>
+            <button id="detect-location-btn">Rileva la mia posizione</button>
+            <div id="location-detection">Posizione rilevata (simulazione): Potenza</div>
         </div>
     </header>
 
-    <section id="alert-section">
-        <div class="alert-indicator yellow">
-            Allerta Gialla
-        </div>
-        <div class="alert-summary">
-            Rischio idrogeologico dalle ore 14:00.
-        </div>
-        <div class="last-update">
-            Ultimo aggiornamento: 10:00
-        </div>
-    </section>
-
-    <section id="quick-access">
-        <a href="#" class="quick-button">
-            <span class="icon">📡</span>
-            Allerta Intelligente
-        </a>
-        <a href="#" class="quick-button">
-            <span class="icon">⚠️</span>
-            Segnala un'Emergenza
-        </a>
-        <a href="#" class="quick-button">
-            <span class="icon">ℹ️</span>
-            Informazioni Utili
-        </a>
-        <a href="#" class="quick-button">
-            <span class="icon">🏘️</span>
-            Comunità
-        </a>
-    </section>
-
-    <section id="news-section">
-        <h2>Aggiornamenti dalla Protezione Civile di Potenza</h2>
+    <section id="useful-info-section">
+        <h2>Informazioni Utili per la Basilicata</h2>
+        <p>In questa sezione troverai guide e risorse specifiche per i rischi presenti nella nostra regione.</p>
         <ul>
-            <li>Esercitazione di Protezione Civile nel quartiere X il [data].</li>
-            <li>Consigli per affrontare l'ondata di calore prevista per la prossima settimana.</li>
-            <li>Chiusura temporanea di Via Y per lavori di manutenzione urgenti.</li>
-            <li>Aggiornamento sulla situazione incendi boschivi nella regione.</li>
+            <li><a href="#">Buone Pratiche in Caso di Terremoto (Basilicata)</a></li>
+            <li><a href="#">Prevenzione e Comportamenti in Caso di Rischio Idrogeologico</a></li>
+            <li><a href="#">Consigli per la Prevenzione degli Incendi Boschivi (Periodo Estivo)</a></li>
+            <li><a href="#">Come Affrontare le Ondate di Calore</a></li>
+            <li><a href="#">Piani di Emergenza Comunali (Elenco - Funzionalità non ancora attiva)</a></li>
         </ul>
-        <a href="#">Archivio Notizie</a>
     </section>
 
-    <footer>
-        <p>Portale non ufficiale a scopo dimostrativo.</p>
-        <p>Fonti ufficiali: <a href="#">Protezione Civile Nazionale</a> | <a href="#">Protezione Civile Basilicata</a></p>
-        <p>Contatti: (Immaginari)</p>
-    </footer>
+    <script>
+        function setAlert(level, message) {
+            // ... (Funzione setAlert precedente) ...
+        }
+
+        document.getElementById('location').addEventListener('change', function() {
+            const selectedLocation = this.value === 'altre' ? 'Basilicata' : this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            document.getElementById('current-location').textContent = selectedLocation;
+            document.getElementById('news-location').textContent = selectedLocation;
+            document.getElementById('map-location').textContent = selectedLocation;
+            document.getElementById('location-detection').textContent = `Località selezionata: ${selectedLocation}`;
+        });
+
+        document.getElementById('detect-location-btn').addEventListener('click', function() {
+            // Simulazione della rilevazione della posizione
+            const simulatedLocation = 'Potenza';
+            document.getElementById('location').value = 'potenza';
+            document.getElementById('current-location').textContent = simulatedLocation;
+            document.getElementById('news-location').textContent = simulatedLocation;
+            document.getElementById('map-location').textContent = simulatedLocation;
+            document.getElementById('location-detection').textContent = `Posizione rilevata (simulazione): ${simulatedLocation}`;
+        });
+    </script>
 </body>
 </html>
