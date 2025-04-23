@@ -1,155 +1,73 @@
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const localPcPlanDiv = document.getElementById('local-pc-plan');
 
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informazioni Utili - Civitas Protetta Basilicata</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Stili specifici per questa pagina (potremmo modularli meglio in futuro) */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #495057;
-            line-height: 1.6;
-        }
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                } else {
+                    localPcPlanDiv.innerHTML = '<p>La geolocalizzazione non è supportata dal tuo browser.</p>';
+                }
+            }
 
-        .container {
-            max-width: 960px;
-            margin: 2em auto;
-            padding: 1.5em;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
+            function showPosition(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                // Qui dovremmo fare una chiamata a un servizio (API) di geocoding inverso
+                // per ottenere il comune più vicino a queste coordinate.
+                // Per ora, simuleremo un risultato:
+                const nearestCity = 'Potenza';
+                suggestLocalPlan(nearestCity);
+            }
 
-        h1 {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 0.5em;
-            margin-bottom: 1em;
-        }
+            function showError(error) {
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        localPcPlanDiv.innerHTML = '<p>Permesso di geolocalizzazione negato dall\'utente.</p>';
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        localPcPlanDiv.innerHTML = '<p>Informazioni sulla posizione non disponibili.</p>';
+                        break;
+                    case error.TIMEOUT:
+                        localPcPlanDiv.innerHTML = '<p>Timeout nel tentativo di ottenere la posizione.</p>';
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        localPcPlanDiv.innerHTML = '<p>Errore sconosciuto durante la geolocalizzazione.</p>';
+                        break;
+                }
+            }
 
-        h2 {
-            color: #28a745;
-            margin-top: 1.5em;
-            margin-bottom: 0.75em;
-        }
+            function suggestLocalPlan(city) {
+                const pcPlans = {
+                    'potenza': { text: 'Visualizza il Piano di Protezione Civile del Comune di Potenza.', link: '#piano_potenza_reale' },
+                    'matera': { text: 'Visualizza il Piano di Protezione Civile del Comune di Matera.', link: '#piano_matera_reale' },
+                    'lagonegro': { text: 'Visualizza il Piano di Protezione Civile del Comune di Lagonegro.', link: '#piano_lagonegro_reale' }
+                    // Aggiungi altri comuni e link reali se li trovi
+                };
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+                if (pcPlans[city.toLowerCase()]) {
+                    localPcPlanDiv.innerHTML = `<h3>Piano di Protezione Civile Locale (Rilevato: ${city})</h3><p>${pcPlans[city.toLowerCase()].text}</p><p><a href="${pcPlans[city.toLowerCase()].link}" target="_blank"><i class="fas fa-external-link-alt"></i> Visualizza il Piano</a></p>`;
+                } else {
+                    localPcPlanDiv.innerHTML = '<h3>Piano di Protezione Civile Locale</h3><p>Impossibile determinare il piano specifico per la tua posizione attuale. Puoi consultare l\'elenco completo dei comuni.</p>';
+                }
+            }
 
-        li {
-            padding: 0.5em 0;
-            border-bottom: 1px solid #eee;
-        }
+            // Chiedi la posizione al caricamento della pagina
+            getLocation();
 
-        li:last-child {
-            border-bottom: none;
-        }
+            // Mostra comunque l'elenco dei piani (anche se non specifico)
+            const pcPlansList = document.getElementById('pc-plans-list');
+            const allPlans = {
+                'potenza': '#piano_potenza_elenco',
+                'matera': '#piano_matera_elenco',
+                'melfi': '#piano_melfi_elenco'
+                // Aggiungi tutti i comuni che vuoi elencare
+            };
+            let listItems = '';
+            for (const city in allPlans) {
+                listItems += `<li><a href="${allPlans[city]}">Piano di Emergenza Comune di ${city.charAt(0).toUpperCase() + city.slice(1)} <i class="fas fa-external-link-alt"></i></a></li>`;
+            }
+            pcPlansList.innerHTML = listItems;
 
-        li a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5em;
-        }
-
-        li a .fas {
-            color: #6c757d;
-            width: 1.2em;
-            text-align: center;
-        }
-
-        .contact-list {
-            margin-top: 1em;
-            padding-left: 20px;
-        }
-
-        .contact-list li {
-            border-bottom: none;
-            padding: 0.25em 0;
-        }
-
-        .contact-list li strong {
-            font-weight: bold;
-        }
-
-        .kit-list {
-            margin-top: 1em;
-            padding-left: 20px;
-        }
-
-        .kit-list li {
-            padding: 0.25em 0;
-            list-style-type: disc;
-        }
-
-        .back-home {
-            display: block;
-            margin-top: 2em;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back-home:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1><i class="fas fa-info-circle"></i> Informazioni Utili per la Basilicata</h1>
-
-        <h2><i class="fas fa-book"></i> Guide e Buone Pratiche</h2>
-        <ul>
-            <li><a href="#"><i class="fas fa-mountain"></i> Terremoto: Cosa Fare (Specifico per la Basilicata)</a></li>
-            <li><a href="#"><i class="fas fa-tint"></i> Rischio Idrogeologico: Prevenzione e Comportamenti</a></li>
-            <li><a href="#"><i class="fas fa-fire-alt"></i> Incendi Boschivi: Come Prevenirli e Cosa Fare</a></li>
-            <li><a href="#"><i class="fas fa-thermometer-half"></i> Ondate di Calore: Consigli e Precauzioni</a></li>
-            <li><a href="#"><i class="fas fa-snowflake"></i> Nevicate Intense: Come Prepararsi e Comportarsi</a></li>
-        </ul>
-
-        <h2><i class="fas fa-map-marked-alt"></i> Piani di Emergenza Comunali</h2>
-        <p>Elenco dei Piani di Emergenza Comunali della Basilicata (link simulati):</p>
-        <ul>
-            <li><a href="#">Piano di Emergenza Comune di Potenza <i class="fas fa-external-link-alt"></i></a></li>
-            <li><a href="#">Piano di Emergenza Comune di Matera <i class="fas fa-external-link-alt"></i></a></li>
-            <li><a href="#">Piano di Emergenza Comune di Melfi <i class="fas fa-external-link-alt"></i></a></li>
-            <li><a href="#">Altri Comuni (Elenco in Aggiornamento)</a></li>
-        </ul>
-
-        <h2><i class="fas fa-phone"></i> Contatti Utili</h2>
-        <ul class="contact-list">
-            <li><strong>Numero Unico Emergenze:</strong> 112</li>
-            <li><strong>Vigili del Fuoco:</strong> 115</li>
-            <li><strong>Emergenza Sanitaria:</strong> 118</li>
-            <li><strong>Protezione Civile Nazionale:</strong> <a href="#">(Sito Web)</a></li>
-            <li><strong>Protezione Civile Regione Basilicata:</strong> (Contatti Telefonici e Sito Web - da inserire)</li>
-            <li><strong>Prefettura di Potenza:</strong> (Contatti - da inserire)</li>
-            <li><strong>Comune di Potenza - Ufficio Protezione Civile:</strong> (Contatti - da inserire)</li>
-            <li><strong>Ospedale San Carlo di Potenza:</strong> (Contatti - da inserire)</li>
-            <li><strong>Altri Ospedali e Punti di Primo Soccorso:</strong> (Elenco - da inserire)</li>
-        </ul>
-
-        <h2><i class="fas fa-box-open"></i> Kit di Emergenza Domestico</h2>
-        <p>Cosa dovrebbe contenere un kit di emergenza di base:</p>
-        <ul class="kit-list">
-            <li>Acqua potabile (almeno 1 litro a persona al giorno per 3 giorni)</li>
-            <li>Alimenti non deperibili (scatolette, barrette energetiche, ecc.)</li>
-            <li>Radio a batteria e batterie di riserva</li>
-            <li>Torcia elettrica e batterie di riserva</li>
-            <li>Kit di pronto soccorso</li>
-            <li>Farmaci personali</li>
-            <li>Documenti personali (copie)</li>
-            <li>Indumenti di ricambio e una coperta</li>
-            <li>Fischietto per segnalare la propria
+        });
+    </script>
