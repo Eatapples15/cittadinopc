@@ -12,6 +12,77 @@
             font-size: 2em;
             margin-bottom: 0.5em;
         }
+        /* Stili per la sezione informazioni utili (potremmo spostarli in un file CSS separato in futuro) */
+        #useful-info-page {
+            background-color: #f8f9fa;
+            padding: 2em;
+        }
+
+        #useful-info-page h1 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+        }
+
+        #useful-info-page h2 {
+            color: #28a745;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+        }
+
+        #useful-info-page ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #useful-info-page li {
+            padding: 0.5em 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        #useful-info-page li:last-child {
+            border-bottom: none;
+        }
+
+        #useful-info-page li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        #useful-info-page li a .fas {
+            color: #6c757d;
+            width: 1.2em;
+            text-align: center;
+        }
+
+        #useful-info-page .contact-list {
+            margin-top: 1em;
+            padding-left: 20px;
+        }
+
+        #useful-info-page .contact-list li {
+            border-bottom: none;
+            padding: 0.25em 0;
+        }
+
+        #useful-info-page .contact-list li strong {
+            font-weight: bold;
+        }
+
+        #useful-info-page .kit-list {
+            margin-top: 1em;
+            padding-left: 20px;
+        }
+
+        #useful-info-page .kit-list li {
+            padding: 0.25em 0;
+            list-style-type: disc;
+        }
     </style>
 </head>
 <body>
@@ -42,10 +113,10 @@
             Ultimo aggiornamento: 10:00
         </div>
         <div class="alert-controls">
-            <button onclick="setAlert('green', 'Nessuna allerta in corso.')"><i class="fas fa-check-circle"></i> Nessuna Allerta</button>
-            <button onclick="setAlert('yellow', 'Allerta gialla per possibili temporali.')"><i class="fas fa-cloud-sun-rain"></i> Allerta Gialla</button>
-            <button onclick="setAlert('orange', 'Allerta arancione per rischio idraulico.')"><i class="fas fa-water"></i> Allerta Arancione</button>
-            <button onclick="setAlert('red', 'Allerta rossa: situazione di emergenza.')"><i class="fas fa-house-flood"></i> Allerta Rossa</button>
+            <button onclick="setAlert('green', '<i class=\'fas fa-check-circle\'></i> Nessuna allerta in corso.')"><i class="fas fa-check-circle"></i> Nessuna Allerta</button>
+            <button onclick="setAlert('yellow', '<i class=\'fas fa-cloud-sun-rain\'></i> Allerta gialla per possibili temporali.')"><i class="fas fa-cloud-sun-rain"></i> Allerta Gialla</button>
+            <button onclick="setAlert('orange', '<i class=\'fas fa-water\'></i> Allerta arancione per rischio idraulico.')"><i class="fas fa-water"></i> Allerta Arancione</button>
+            <button onclick="setAlert('red', '<i class=\'fas fa-house-flood\'></i> Allerta rossa: situazione di emergenza.')"><i class="fas fa-house-flood"></i> Allerta Rossa</button>
         </div>
     </section>
 
@@ -58,7 +129,7 @@
             <i class="fas fa-exclamation-circle"></i>
             Segnala un'Emergenza
         </a>
-        <a href="#" class="quick-button">
+        <a href="useful_info.html" class="quick-button">
             <i class="fas fa-info-circle"></i>
             Informazioni Utili
         </a>
@@ -99,7 +170,7 @@
 
             alertIndicator.className = `alert-indicator ${level}`;
             alertIndicator.innerHTML = icon + level.charAt(0).toUpperCase() + level.slice(1) + (level === 'green' ? '' : ' Allerta');
-            alertSummary.textContent = message;
+            alertSummary.innerHTML = message; // Permettiamo l'HTML nelle icone
         }
 
         document.getElementById('location').addEventListener('change', function() {
