@@ -3,152 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informazioni Utili - Civitas Protetta Basilicata</title>
+    <title>Civitas Protetta - Basilicata</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Stili specifici per questa pagina (potremmo modularli meglio in futuro) */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #495057;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 960px;
-            margin: 2em auto;
-            padding: 1.5em;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        h1 {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 0.5em;
-            margin-bottom: 1em;
-        }
-
-        h2 {
-            color: #28a745;
-            margin-top: 1.5em;
-            margin-bottom: 0.75em;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            padding: 0.5em 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        li:last-child {
-            border-bottom: none;
-        }
-
-        li a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5em;
-        }
-
-        li a .fas {
-            color: #6c757d;
-            width: 1.2em;
-            text-align: center;
-        }
-
-        .contact-list {
-            margin-top: 1em;
-            padding-left: 20px;
-        }
-
-        .contact-list li {
-            border-bottom: none;
-            padding: 0.25em 0;
-        }
-
-        .contact-list li strong {
-            font-weight: bold;
-        }
-
-        .kit-list {
-            margin-top: 1em;
-            padding-left: 20px;
-        }
-
-        .kit-list li {
-            padding: 0.25em 0;
-            list-style-type: disc;
-        }
-
-        .back-home {
-            display: block;
-            margin-top: 2em;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back-home:hover {
-            text-decoration: underline;
+        /* Stili aggiuntivi per le icone Font Awesome */
+        .quick-button .fas {
+            font-size: 2em;
+            margin-bottom: 0.5em;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1><i class="fas fa-info-circle"></i> Informazioni Utili per la Basilicata</h1>
+    <header>
+        <div class="logo">
+            <span>CP</span> Civitas Protetta - Basilicata
+        </div>
+        <div class="location-selector">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="current-location">Potenza</span>
+            <select id="location">
+                <option value="potenza" selected>Potenza</option>
+                <option value="matera">Matera</option>
+                <option value="lagonegro">Lagonegro</option>
+                <option value="altre">Altre località...</option>
+            </select>
+        </div>
+    </header>
 
-        <h2><i class="fas fa-book"></i> Guide e Buone Pratiche</h2>
+    <section id="alert-section">
+        <div id="alert-indicator" class="alert-indicator yellow">
+            <i class="fas fa-exclamation-triangle"></i> Allerta Gialla
+        </div>
+        <div id="alert-summary" class="alert-summary">
+            Rischio idrogeologico dalle ore 14:00.
+        </div>
+        <div class="last-update">
+            Ultimo aggiornamento: 10:00
+        </div>
+        <div class="alert-controls">
+            <button onclick="setAlert('green', 'Nessuna allerta in corso.')"><i class="fas fa-check-circle"></i> Nessuna Allerta</button>
+            <button onclick="setAlert('yellow', 'Allerta gialla per possibili temporali.')"><i class="fas fa-cloud-sun-rain"></i> Allerta Gialla</button>
+            <button onclick="setAlert('orange', 'Allerta arancione per rischio idraulico.')"><i class="fas fa-water"></i> Allerta Arancione</button>
+            <button onclick="setAlert('red', 'Allerta rossa: situazione di emergenza.')"><i class="fas fa-house-flood"></i> Allerta Rossa</button>
+        </div>
+    </section>
+
+    <section id="quick-access">
+        <a href="#" class="quick-button">
+            <i class="fas fa-rss"></i>
+            Allerta Intelligente
+        </a>
+        <a href="#" class="quick-button">
+            <i class="fas fa-exclamation-circle"></i>
+            Segnala un'Emergenza
+        </a>
+        <a href="#" class="quick-button">
+            <i class="fas fa-info-circle"></i>
+            Informazioni Utili
+        </a>
+        <a href="#" class="quick-button">
+            <i class="fas fa-users"></i>
+            Comunità
+        </a>
+    </section>
+
+    <section id="news-section">
+        <h2>Aggiornamenti dalla Protezione Civile di <span id="news-location">Potenza</span></h2>
         <ul>
-            <li><a href="#"><i class="fas fa-mountain"></i> Terremoto: Cosa Fare (Specifico per la Basilicata)</a></li>
-            <li><a href="#"><i class="fas fa-tint"></i> Rischio Idrogeologico: Prevenzione e Comportamenti</a></li>
-            <li><a href="#"><i class="fas fa-fire-alt"></i> Incendi Boschivi: Come Prevenirli e Cosa Fare</a></li>
-            <li><a href="#"><i class="fas fa-thermometer-half"></i> Ondate di Calore: Consigli e Precauzioni</a></li>
-            <li><a href="#"><i class="fas fa-snowflake"></i> Nevicate Intense: Come Prepararsi e Comportarsi</a></li>
+            <li><i class="fas fa-newspaper"></i> Esercitazione di Protezione Civile nel quartiere X il [data].</li>
+            <li><i class="fas fa-sun"></i> Consigli per affrontare l'ondata di calore prevista per la prossima settimana.</li>
+            <li><i class="fas fa-road"></i> Chiusura temporanea di Via Y per lavori di manutenzione urgenti.</li>
+            <li><i class="fas fa-fire"></i> Aggiornamento sulla situazione incendi boschivi nella regione.</li>
         </ul>
+        <a href="#"><i class="fas fa-archive"></i> Archivio Notizie</a>
+    </section>
 
-        <h2><i class="fas fa-map-marked-alt"></i> Piani di Emergenza Comunali</h2>
-        <p>Elenco dei Piani di Emergenza Comunali della Basilicata (link simulati):</p>
-        <ul>
-            <li><a href="#">Piano di Emergenza Comune di Potenza <i class="fas fa-external-link-alt"></i></a></li>
-            <li><a href="#">Piano di Emergenza Comune di Matera <i class="fas fa-external-link-alt"></i></a></li>
-            <li><a href="#">Piano di Emergenza Comune di Melfi <i class="fas fa-external-link-alt"></i></a></li>
-            <li><a href="#">Altri Comuni (Elenco in Aggiornamento)</a></li>
-        </ul>
+    <footer>
+        <p>Portale non ufficiale a scopo dimostrativo.</p>
+        <p>Fonti ufficiali: <a href="#"><i class="fas fa-shield-alt"></i> Protezione Civile Nazionale</a> | <a href="#"><i class="fas fa-building"></i> Protezione Civile Basilicata</a></p>
+        <p>Contatti: (Immaginari)</p>
+    </footer>
 
-        <h2><i class="fas fa-phone"></i> Contatti Utili</h2>
-        <ul class="contact-list">
-            <li><strong>Numero Unico Emergenze:</strong> 112</li>
-            <li><strong>Vigili del Fuoco:</strong> 115</li>
-            <li><strong>Emergenza Sanitaria:</strong> 118</li>
-            <li><strong>Protezione Civile Nazionale:</strong> <a href="#">(Sito Web)</a></li>
-            <li><strong>Protezione Civile Regione Basilicata:</strong> (Contatti Telefonici e Sito Web - da inserire)</li>
-            <li><strong>Prefettura di Potenza:</strong> (Contatti - da inserire)</li>
-            <li><strong>Comune di Potenza - Ufficio Protezione Civile:</strong> (Contatti - da inserire)</li>
-            <li><strong>Ospedale San Carlo di Potenza:</strong> (Contatti - da inserire)</li>
-            <li><strong>Altri Ospedali e Punti di Primo Soccorso:</strong> (Elenco - da inserire)</li>
-        </ul>
+    <script>
+        function setAlert(level, message) {
+            const alertIndicator = document.getElementById('alert-indicator');
+            const alertSummary = document.getElementById('alert-summary');
+            let icon = '';
+            switch (level) {
+                case 'yellow': icon = '<i class="fas fa-exclamation-triangle"></i> '; break;
+                case 'orange': icon = '<i class="fas fa-water"></i> '; break;
+                case 'red': icon = '<i class="fas fa-house-flood"></i> '; break;
+                default: icon = '<i class="fas fa-check-circle"></i> '; break;
+            }
 
-        <h2><i class="fas fa-box-open"></i> Kit di Emergenza Domestico</h2>
-        <p>Cosa dovrebbe contenere un kit di emergenza di base:</p>
-        <ul class="kit-list">
-            <li>Acqua potabile (almeno 1 litro a persona al giorno per 3 giorni)</li>
-            <li>Alimenti non deperibili (scatolette, barrette energetiche, ecc.)</li>
-            <li>Radio a batteria e batterie di riserva</li>
-            <li>Torcia elettrica e batterie di riserva</li>
-            <li>Kit di pronto soccorso</li>
-            <li>Farmaci personali</li>
-            <li>Documenti personali (copie)</li>
-            <li>Indumenti di ricambio e una coperta</li>
-            <li>Fischietto per segnalare la propria
+            alertIndicator.className = `alert-indicator ${level}`;
+            alertIndicator.innerHTML = icon + level.charAt(0).toUpperCase() + level.slice(1) + (level === 'green' ? '' : ' Allerta');
+            alertSummary.textContent = message;
+        }
+
+        document.getElementById('location').addEventListener('change', function() {
+            const selectedLocation = this.value === 'altre' ? 'Basilicata' : this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            document.getElementById('current-location').textContent = selectedLocation;
+            document.getElementById('news-location').textContent = selectedLocation;
+        });
+    </script>
+</body>
+</html>
