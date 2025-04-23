@@ -1,85 +1,6 @@
-body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-}
+/* ... Stili precedenti ... */
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-.location-selector label {
-    margin-right: 0.5em;
-}
-
-#alert-section {
-    background-color: #fff;
-    padding: 1.5em;
-    margin: 1em;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.alert-indicator {
-    font-size: 2em;
-    font-weight: bold;
-    padding: 0.5em 1em;
-    border-radius: 5px;
-    margin-bottom: 0.5em;
-    display: inline-block;
-}
-
-.yellow {
-    background-color: #ffc107;
-    color: #333;
-}
-
-.alert-summary {
-    margin-bottom: 0.5em;
-}
-
-#quick-access {
-    display: flex;
-    justify-content: space-around;
-    padding: 1em;
-    background-color: #eee;
-}
-
-.quick-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 1em;
-    text-decoration: none;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-}
-
-.quick-button .icon {
-    font-size: 2em;
-    margin-bottom: 0.5em;
-}
-
-#news-section {
+#useful-info-section {
     background-color: #fff;
     padding: 1.5em;
     margin: 1em;
@@ -87,34 +8,57 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#news-section h2 {
-    margin-top: 0;
+#useful-info-section h2 {
     color: #555;
+    margin-top: 0;
+    margin-bottom: 1em;
 }
 
-#news-section ul {
+#useful-info-section p {
+    color: #777;
+    margin-bottom: 1em;
+}
+
+#useful-info-section ul {
     list-style: none;
     padding: 0;
 }
 
-#news-section li {
+#useful-info-section li {
     padding: 0.5em 0;
     border-bottom: 1px solid #eee;
 }
 
-#news-section li:last-child {
+#useful-info-section li:last-child {
     border-bottom: none;
 }
 
-footer {
-    text-align: center;
-    padding: 1em;
-    background-color: #333;
-    color: white;
-    font-size: 0.8em;
+#useful-info-section li a {
+    text-decoration: none;
+    color: #007bff;
 }
 
-footer a {
-    color: #ddd;
-    text-decoration: none;
+#useful-info-section li a:hover {
+    text-decoration: underline;
 }
+
+#location-detection {
+    margin-left: 1em;
+    font-size: 0.8em;
+    color: #777;
+}
+
+#detect-location-btn {
+    padding: 0.5em 1em;
+    margin-left: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f8f8f8;
+}
+
+#detect-location-btn:hover {
+    background-color: #eee;
+}
+
+/* ... Stili del footer ... */
